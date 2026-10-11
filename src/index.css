@@ -34,6 +34,13 @@
   color-scheme: dark;
 }
 
+/* Native <select> dropdown options ignore most styling; without this the
+   option list renders with a white background in dark mode. */
+.dark option {
+  background-color: #2a241d;
+  color: #efe8d9;
+}
+
 body {
   background-color: var(--paper);
   color: var(--ink);
