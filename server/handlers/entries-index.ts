@@ -1,17 +1,17 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { and, asc, desc, eq, exists, gte, lte, not, sql } from 'drizzle-orm';
 import type { SQL } from 'drizzle-orm';
-import { checkCsrf, requireAuth } from '../_lib/auth.js';
-import { getDb, entries, categories, entryTags, entryImages } from '../_lib/db.js';
-import { entriesQuerySchema, entryInputSchema } from '../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../_lib/respond.js';
+import { checkCsrf, requireAuth } from '../lib/auth.js';
+import { getDb, entries, categories, entryTags, entryImages } from '../lib/db.js';
+import { entriesQuerySchema, entryInputSchema } from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
 import {
   buildEntryDTOs,
   insertPhotos,
   queryParam,
   upsertTagIds,
   type Db,
-} from '../_lib/entry-dto.js';
+} from '../lib/entry-dto.js';
 
 function daysInMonth(y: number, m: number): number {
   if (m === 2) return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0 ? 29 : 28;

@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { checkCsrf, requireAuth, clearSessionCookie } from '../_lib/auth.js';
-import { ok, methodNotAllowed } from '../_lib/respond.js';
+import { checkCsrf, requireAuth, clearSessionCookie } from '../lib/auth.js';
+import { ok, methodNotAllowed } from '../lib/respond.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return methodNotAllowed(res, ['POST']);

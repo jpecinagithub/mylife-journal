@@ -6,8 +6,8 @@
  * test pattern to follow.
  */
 import { describe, it, expect } from 'vitest';
-import { dateStringSchema, entryInputSchema, loginSchema } from '../api/_lib/validate.js';
-import { signSession, verifySession } from '../api/_lib/auth.js';
+import { dateStringSchema, entryInputSchema, loginSchema } from '../server/lib/validate.js';
+import { signSession, verifySession } from '../server/lib/auth.js';
 
 describe('dateStringSchema', () => {
   it('accepts a normal calendar date', () => {

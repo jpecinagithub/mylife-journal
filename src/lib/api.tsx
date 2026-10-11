@@ -3,8 +3,8 @@
  * mutations. All requests are same-origin with credentials included.
  *
  * Shapes are aligned with the browser-safe shared libs:
- *   - DTO types from '../../api/_lib/types' (snake_case)
- *   - zod schemas from '../../api/_lib/validate'
+ *   - DTO types from '../../server/lib/types' (snake_case)
+ *   - zod schemas from '../../server/lib/validate'
  * Where the original prose contract and the shared libs disagree, this client
  * normalizes defensively (snake_case first, camelCase fallback).
  */
@@ -24,7 +24,7 @@ import type {
   EntryPhotoDTO,
   ImportJobDTO,
   ImportJobStatus,
-} from '../../api/_lib/types';
+} from '../../server/lib/types';
 import { useEffect } from 'react';
 
 // Re-export shared DTO types so components import from one place.

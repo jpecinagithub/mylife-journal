@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { desc } from 'drizzle-orm';
-import { checkCsrf, requireAuth } from '../../_lib/auth.js';
-import { getDb, importJobs } from '../../_lib/db.js';
-import { importJobCreateSchema } from '../../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../../_lib/respond.js';
-import { toImportJobDTO, type Db } from '../../_lib/entry-dto.js';
+import { checkCsrf, requireAuth } from '../lib/auth.js';
+import { getDb, importJobs } from '../lib/db.js';
+import { importJobCreateSchema } from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
+import { toImportJobDTO, type Db } from '../lib/entry-dto.js';
 
 async function handleCreate(req: VercelRequest, res: VercelResponse, db: Db) {
   const parsed = importJobCreateSchema.safeParse(req.body);

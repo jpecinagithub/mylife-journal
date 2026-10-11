@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { and, asc, eq } from 'drizzle-orm';
 import { z } from 'zod';
-import { checkCsrf, requireAuth } from '../../../_lib/auth.js';
-import { getDb, importJobs, importItems } from '../../../_lib/db.js';
-import { err, ok, methodNotAllowed } from '../../../_lib/respond.js';
-import { queryParam } from '../../../_lib/entry-dto.js';
+import { checkCsrf, requireAuth } from '../lib/auth.js';
+import { getDb, importJobs, importItems } from '../lib/db.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
+import { queryParam } from '../lib/entry-dto.js';
 
 const idSchema = z.string().uuid();
 

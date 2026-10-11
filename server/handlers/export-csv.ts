@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { asc, desc, eq, inArray, sql } from 'drizzle-orm';
-import { requireAuth } from '../_lib/auth.js';
-import { getDb, entries, categories, entryTags, tags } from '../_lib/db.js';
-import { err, methodNotAllowed } from '../_lib/respond.js';
+import { requireAuth } from '../lib/auth.js';
+import { getDb, entries, categories, entryTags, tags } from '../lib/db.js';
+import { err, methodNotAllowed } from '../lib/respond.js';
 
 const CSV_MAX_ROWS = 20000;
 

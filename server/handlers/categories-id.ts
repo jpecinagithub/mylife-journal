@@ -1,12 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { eq, sql } from 'drizzle-orm';
 import { z } from 'zod';
-import { checkCsrf, requireAuth } from '../_lib/auth.js';
-import { getDb, categories, entries } from '../_lib/db.js';
-import { categorySchema } from '../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../_lib/respond.js';
-import { queryParam, type Db } from '../_lib/entry-dto.js';
-import type { CategoryDTO } from '../_lib/types.js';
+import { checkCsrf, requireAuth } from '../lib/auth.js';
+import { getDb, categories, entries } from '../lib/db.js';
+import { categorySchema } from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
+import { queryParam, type Db } from '../lib/entry-dto.js';
+import type { CategoryDTO } from '../lib/types.js';
 
 const idSchema = z.string().uuid();
 

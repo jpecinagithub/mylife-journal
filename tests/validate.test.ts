@@ -1,5 +1,5 @@
 /**
- * MyLife Journal — zod schema contract tests (api/_lib/validate.ts).
+ * MyLife Journal — zod schema contract tests (server/lib/validate.ts).
  */
 import { describe, it, expect } from 'vitest';
 import {
@@ -8,7 +8,7 @@ import {
   calendarQuerySchema,
   loginSchema,
   importBatchSchema,
-} from '../api/_lib/validate.js';
+} from '../server/lib/validate.js';
 
 const UUID = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
 

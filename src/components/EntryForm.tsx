@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Save, CloudOff } from 'lucide-react';
-import { dateStringSchema } from '../../api/_lib/validate';
+import { dateStringSchema } from '../../server/lib/validate';
 import type { EntryDTO } from '../lib/api';
 import { useCategories } from '../lib/api';
 import { photoThumbSrc } from '../lib/api';

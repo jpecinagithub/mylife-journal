@@ -1,11 +1,11 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { asc, eq, sql } from 'drizzle-orm';
-import { checkCsrf, requireAuth } from '../_lib/auth.js';
-import { getDb, categories } from '../_lib/db.js';
-import { categorySchema } from '../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../_lib/respond.js';
-import type { CategoryDTO } from '../_lib/types.js';
-import type { Db } from '../_lib/entry-dto.js';
+import { checkCsrf, requireAuth } from '../lib/auth.js';
+import { getDb, categories } from '../lib/db.js';
+import { categorySchema } from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
+import type { CategoryDTO } from '../lib/types.js';
+import type { Db } from '../lib/entry-dto.js';
 
 function isUniqueViolation(e: unknown): boolean {
   return typeof e === 'object' && e !== null && (e as { code?: string }).code === '23505';

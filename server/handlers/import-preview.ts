@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { and, eq, inArray } from 'drizzle-orm';
-import { checkCsrf, requireAuth } from '../_lib/auth.js';
-import { getDb, entries } from '../_lib/db.js';
-import { importPreviewSchema } from '../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../_lib/respond.js';
+import { checkCsrf, requireAuth } from '../lib/auth.js';
+import { getDb, entries } from '../lib/db.js';
+import { importPreviewSchema } from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
 
 /**
  * POST /api/import/preview — dry-run duplicate detection for an import.

@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { asc, desc, sql } from 'drizzle-orm';
-import { requireAuth } from '../_lib/auth.js';
-import { getDb, entries, categories, tags } from '../_lib/db.js';
-import { exportJsonQuerySchema } from '../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../_lib/respond.js';
-import { buildEntryDTOs, queryParam, type Db } from '../_lib/entry-dto.js';
+import { requireAuth } from '../lib/auth.js';
+import { getDb, entries, categories, tags } from '../lib/db.js';
+import { exportJsonQuerySchema } from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
+import { buildEntryDTOs, queryParam, type Db } from '../lib/entry-dto.js';
 
 /**
  * GET /api/export/json — paginated JSON backup.

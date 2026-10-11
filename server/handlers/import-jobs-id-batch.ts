@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { and, asc, eq } from 'drizzle-orm';
 import { z } from 'zod';
-import { checkCsrf, requireAuth } from '../../../_lib/auth.js';
+import { checkCsrf, requireAuth } from '../lib/auth.js';
 import {
   getDb,
   entries,
@@ -9,19 +9,19 @@ import {
   entryTags,
   importJobs,
   importItems,
-} from '../../../_lib/db.js';
+} from '../lib/db.js';
 import {
   importJobBatchSchema,
   type ImportJobBatchItem,
-} from '../../../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../../../_lib/respond.js';
+} from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
 import {
   insertPhotos,
   queryParam,
   upsertTagIds,
   type Db,
   type PhotoInput,
-} from '../../../_lib/entry-dto.js';
+} from '../lib/entry-dto.js';
 
 const idSchema = z.string().uuid();
 

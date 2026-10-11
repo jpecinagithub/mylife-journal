@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { randomUUID } from 'node:crypto';
-import { checkCsrf, requireAuth } from '../_lib/auth.js';
-import { uploadBlob, getMaxImageBytes } from '../_lib/blob.js';
-import { imageUploadSchema, type ImageUploadInput } from '../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../_lib/respond.js';
+import { checkCsrf, requireAuth } from '../lib/auth.js';
+import { uploadBlob, getMaxImageBytes } from '../lib/blob.js';
+import { imageUploadSchema, type ImageUploadInput } from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
 
 /**
  * POST /api/images/upload — JSON + base64 body (NOT multipart, avoids parser deps).

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Plus, Pencil, Trash2, ChevronUp, ChevronDown, ArrowRight } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { categorySchema } from '../../api/_lib/validate';
+import { categorySchema } from '../../server/lib/validate';
 import { z } from 'zod';
 import { useLang } from '../i18n/strings';
 import {

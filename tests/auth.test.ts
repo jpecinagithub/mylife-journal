@@ -1,5 +1,5 @@
 /**
- * MyLife Journal — session auth contract tests (api/_lib/auth.ts).
+ * MyLife Journal — session auth contract tests (server/lib/auth.ts).
  *
  * signSession/verifySession take the secret as an argument; SESSION_SECRET is
  * set here as well so the env-based helpers (requireAuth, verifyPassword)
@@ -7,7 +7,7 @@
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import crypto from 'node:crypto';
-import { signSession, verifySession } from '../api/_lib/auth.js';
+import { signSession, verifySession } from '../server/lib/auth.js';
 
 const SECRET = 'test-session-secret-do-not-use-in-prod';
 

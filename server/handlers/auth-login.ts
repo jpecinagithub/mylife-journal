@@ -5,9 +5,9 @@ import {
   checkLoginRateLimit,
   serializeSessionCookie,
   signSession,
-} from '../_lib/auth.js';
-import { loginSchema } from '../_lib/validate.js';
-import { err, ok, methodNotAllowed } from '../_lib/respond.js';
+} from '../lib/auth.js';
+import { loginSchema } from '../lib/validate.js';
+import { err, ok, methodNotAllowed } from '../lib/respond.js';
 
 function clientIp(req: VercelRequest): string {
   const xff = req.headers['x-forwarded-for'];
