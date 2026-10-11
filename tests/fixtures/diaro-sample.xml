@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Synthetic DiaroBackup.xml fixture for parser unit tests.
+  ALL data here is fake ("Test Entry One", etc.). It mirrors the real
+  schema of the Diaro Android app export: <data version="2"> with
+  <table name="..."> sections and <r> rows.
+-->
+<data version="2">
+  <table name="diaro_folders">
+    <r>
+      <uid>11111111111111111111111111111111</uid>
+      <title>Test Folder</title>
+      <color>#4a90d9</color>
+      <pattern>0</pattern>
+    </r>
+  </table>
+  <table name="diaro_locations">
+    <r>
+      <uid>22222222222222222222222222222222</uid>
+      <title>Test Park</title>
+      <address>1 Example Street, Testville</address>
+      <lat>40.416775</lat>
+      <lng>-3.70379</lng>
+      <zoom>14</zoom>
+    </r>
+  </table>
+  <table name="diaro_tags">
+    <r>
+      <uid>33333333333333333333333333333333</uid>
+      <title>test-tag</title>
+    </r>
+  </table>
+  <table name="diaro_entries">
+    <r>
+      <uid>44444444444444444444444444444444</uid>
+      <date>1714984200000</date>
+      <tz_offset>+02:00</tz_offset>
+      <title>Test Entry One</title>
+      <text>First line of the test entry.&#10;Second line of the test entry.</text>
+      <folder_uid>11111111111111111111111111111111</folder_uid>
+      <location_uid>22222222222222222222222222222222</location_uid>
+      <tags>33333333333333333333333333333333</tags>
+      <primary_photo_uid>66666666666666666666666666666666</primary_photo_uid>
+      <weather_temperature></weather_temperature>
+      <weather_icon></weather_icon>
+      <weather_description></weather_description>
+      <mood></mood>
+    </r>
+    <r>
+      <uid>55555555555555555555555555555555</uid>
+      <date>1715097900000</date>
+      <tz_offset>+02:00</tz_offset>
+      <title>Test Entry Two</title>
+      <text>An entry without folder, location, tags or photos.</text>
+      <folder_uid></folder_uid>
+      <location_uid></location_uid>
+      <tags></tags>
+      <primary_photo_uid></primary_photo_uid>
+      <weather_temperature></weather_temperature>
+      <weather_icon></weather_icon>
+      <weather_description></weather_description>
+      <mood></mood>
+    </r>
+  </table>
+  <table name="diaro_attachments">
+    <r>
+      <uid>66666666666666666666666666666666</uid>
+      <entry_uid>44444444444444444444444444444444</entry_uid>
+      <type>photo</type>
+      <filename>test-photo-primary.jpg</filename>
+      <position>2</position>
+    </r>
+    <r>
+      <uid>77777777777777777777777777777777</uid>
+      <entry_uid>44444444444444444444444444444444</entry_uid>
+      <type>photo</type>
+      <filename>test-photo-second.jpg</filename>
+      <position>1</position>
+    </r>
+  </table>
+</data>
