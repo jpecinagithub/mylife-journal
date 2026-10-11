@@ -432,7 +432,7 @@ export function ImportPage() {
         ref={fileRef}
         type="file"
         className="hidden"
-        accept=".zip,.csv,.json,.txt,.md"
+        accept=".zip,.docx,.csv,.json,.txt,.md"
         onChange={(e) => {
           const f = e.target.files?.[0];
           if (f) void handleFile(f);

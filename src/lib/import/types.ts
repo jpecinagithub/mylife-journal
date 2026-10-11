@@ -56,7 +56,7 @@ export type ImportReport = {
 };
 
 /** Formats the import library can detect and parse. */
-export type ImportFormat = 'diaro-zip' | 'csv' | 'json' | 'txt' | 'unknown';
+export type ImportFormat = 'diaro-zip' | 'diaro-docx' | 'csv' | 'json' | 'txt' | 'unknown';
 
 export type ProgressCallback = (pct: number) => void;
 

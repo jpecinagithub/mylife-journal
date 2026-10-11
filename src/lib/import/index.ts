@@ -13,6 +13,7 @@
 import JSZip from 'jszip';
 import type { ImportFormat, ParsedImport, ProgressCallback, ImportFolder } from './types.js';
 import { parseDiaroZip } from './diaro-xml.js';
+import { parseDiaroDocx } from './diaro-docx.js';
 import { parseCsv } from './csv.js';
 import { parseJson } from './json.js';
 import { parseTxt } from './txt.js';
@@ -60,6 +61,24 @@ async function zipContainsDiaroBackup(file: File | Blob): Promise<boolean> {
   }
 }
 
+/** True when the ZIP is a Word document (has word/document.xml). */
+async function zipContainsWordDocument(file: File | Blob): Promise<boolean> {
+  try {
+    const zip = await JSZip.loadAsync(file);
+    return Object.keys(zip.files).some((path) => /(^|\/)word\/document\.xml$/i.test(path));
+  } catch {
+    return false;
+  }
+}
+
+async function detectZipFormat(file: File | Blob): Promise<ImportFormat> {
+  const head = await readHead(file, 4);
+  if (!isZipMagic(head)) return 'unknown';
+  if (await zipContainsDiaroBackup(file)) return 'diaro-zip';
+  if (await zipContainsWordDocument(file)) return 'diaro-docx';
+  return 'unknown';
+}
+
 /** Very cheap text sniff used when the extension tells us nothing. */
 function sniffTextFormat(head: string): ImportFormat {
   const s = head.trimStart();
@@ -79,9 +98,11 @@ export async function detectFormat(file: File): Promise<ImportFormat> {
   const ext = extensionOf(file.name);
 
   if (ext === 'zip') {
-    const head = await readHead(file, 4);
-    if (!isZipMagic(head)) return 'unknown';
-    return (await zipContainsDiaroBackup(file)) ? 'diaro-zip' : 'unknown';
+    return detectZipFormat(file);
+  }
+  if (ext === 'docx') {
+    const format = await detectZipFormat(file);
+    return format === 'unknown' ? 'unknown' : format;
   }
   if (ext === 'csv') return 'csv';
   if (ext === 'json') return 'json';
@@ -90,7 +111,7 @@ export async function detectFormat(file: File): Promise<ImportFormat> {
   // Unknown extension: sniff the content.
   const head = await readHead(file, 4);
   if (isZipMagic(head)) {
-    return (await zipContainsDiaroBackup(file)) ? 'diaro-zip' : 'unknown';
+    return detectZipFormat(file);
   }
   const textHead = await readHead(file, 4096);
   return sniffTextFormat(new TextDecoder().decode(textHead));
@@ -102,6 +123,8 @@ export async function parseFile(file: File, onProgress?: ProgressCallback): Prom
   switch (format) {
     case 'diaro-zip':
       return parseDiaroZip(file, (pct) => onProgress?.(2 + Math.round(pct * 0.98)));
+    case 'diaro-docx':
+      return parseDiaroDocx(file, (pct) => onProgress?.(2 + Math.round(pct * 0.98)));
     case 'csv':
       onProgress?.(40);
       return parseCsv(await file.text());
@@ -114,7 +137,7 @@ export async function parseFile(file: File, onProgress?: ProgressCallback): Prom
     case 'unknown':
     default:
       throw new Error(
-        `Could not detect the file format of "${file.name}". Supported formats: Diaro backup ZIP, CSV, JSON, TXT.`,
+        `Could not detect the file format of "${file.name}". Supported formats: Diaro backup ZIP, Diaro Online DOCX export, CSV, JSON, TXT.`,
       );
   }
 }
