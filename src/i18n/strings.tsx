@@ -104,6 +104,8 @@ const es = {
   'timeline.loadMore': 'Cargar más',
   'timeline.end': 'Has llegado al principio de tu diario',
   'timeline.filter.category': 'Categoría',
+  'timeline.search.clear': 'Limpiar búsqueda',
+  'timeline.search.empty': 'No hay coincidencias para esta búsqueda',
   'timeline.empty.title': 'Sin entradas todavía',
   'timeline.empty.body': 'Cuando escribas tu primera entrada, aparecerá aquí.',
 
@@ -360,6 +362,8 @@ const en: typeof es = {
   'timeline.loadMore': 'Load more',
   'timeline.end': 'You have reached the beginning of your journal',
   'timeline.filter.category': 'Category',
+  'timeline.search.clear': 'Clear search',
+  'timeline.search.empty': 'No matches for this search',
   'timeline.empty.title': 'No entries yet',
   'timeline.empty.body': 'Once you write your first entry, it will appear here.',
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowDownWideNarrow, ArrowUpNarrowWide, Layers } from 'lucide-react';
+import { ArrowDownWideNarrow, ArrowUpNarrowWide, Layers, Search, X } from 'lucide-react';
 import { useLang } from '../i18n/strings';
 import {
   apiFetch, entriesSearchParams, normalizePaginated, useCategories,
@@ -30,8 +30,16 @@ export function TimelinePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [sort, setSort] = useState<'desc' | 'asc'>('desc');
   const [grouped, setGrouped] = useState(true);
+  const [searchInput, setSearchInput] = useState('');
+  const [search, setSearch] = useState('');
   const [catSlug, setCatSlug] = useState<string | undefined>(searchParams.get('category') ?? undefined);
   const { data: categories } = useCategories();
+
+  // Debounce the search box so we don't hammer the API on every keystroke.
+  useEffect(() => {
+    const id = setTimeout(() => setSearch(searchInput.trim()), 400);
+    return () => clearTimeout(id);
+  }, [searchInput]);
 
   const pickCategory = (slug: string | undefined) => {
     setCatSlug(slug);
@@ -39,9 +47,9 @@ export function TimelinePage() {
   };
 
   const query = useInfiniteQuery({
-    queryKey: ['entries', { category: catSlug, sort, per_page: PER_PAGE, infinite: true }],
+    queryKey: ['entries', { category: catSlug, sort, search, per_page: PER_PAGE, infinite: true }],
     queryFn: ({ pageParam }) =>
-      apiFetch<unknown>(`/api/entries?${entriesSearchParams({ category: catSlug, sort, per_page: PER_PAGE, page: pageParam })}`)
+      apiFetch<unknown>(`/api/entries?${entriesSearchParams({ search: search || undefined, category: catSlug, sort, per_page: PER_PAGE, page: pageParam })}`)
         .then(normalizePaginated<EntryDTO>),
     initialPageParam: 1,
     getNextPageParam: (last) => (last.page < last.total_pages ? last.page + 1 : undefined),
@@ -98,6 +106,28 @@ export function TimelinePage() {
         </div>
       </div>
 
+      <div className="relative">
+        <Search size={16} aria-hidden className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 opacity-50" />
+        <input
+          type="search"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          placeholder={t('search.placeholder')}
+          aria-label={t('search.title')}
+          className="w-full rounded-xl border border-[var(--cream-200)] bg-transparent py-2 pl-9 pr-9 text-sm placeholder:opacity-50 focus:border-[var(--accent-500)] focus:outline-none"
+        />
+        {searchInput && (
+          <button
+            type="button"
+            onClick={() => setSearchInput('')}
+            aria-label={t('timeline.search.clear')}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 opacity-60 hover:opacity-100"
+          >
+            <X size={16} aria-hidden />
+          </button>
+        )}
+      </div>
+
       {(categories?.length ?? 0) > 1 && (
         <div className="flex gap-2 overflow-x-auto pb-1" role="group" aria-label={t('timeline.filter.category')}>
           <button
@@ -144,7 +174,10 @@ export function TimelinePage() {
           }
         />
       ) : items.length === 0 ? (
-        <EmptyState title={t('timeline.empty.title')} body={t('timeline.empty.body')} />
+        <EmptyState
+          title={search ? t('timeline.search.empty') : t('timeline.empty.title')}
+          body={search ? '' : t('timeline.empty.body')}
+        />
       ) : grouped ? (
         <div className="space-y-6">
           {groupByMonth(items).map((g) => {
