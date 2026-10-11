@@ -60,7 +60,7 @@ export const entryInputSchema = z.object({
   rating: z.number().int().min(1).max(5).nullable().optional(),
   location: z.string().max(200).nullable().optional(),
   tags: z.array(z.string().min(1).max(40)).max(20).optional().default([]),
-  photos: z.array(photoSchema).max(20).optional().default([]),
+  photos: z.array(photoSchema).max(50).optional().default([]),
 });
 export type EntryInput = z.infer<typeof entryInputSchema>;
 
@@ -183,7 +183,7 @@ export const importJobBatchItemSchema = z
     rating: z.number().int().min(1).max(5).nullable().optional(),
     location: z.string().max(200).nullable().optional(),
     tags: z.array(z.string().min(1).max(40)).max(20).optional().default([]),
-    photos: z.array(importPhotoSchema).max(20).optional().default([]),
+    photos: z.array(importPhotoSchema).max(50).optional().default([]),
   })
   .superRefine((v, ctx) => {
     if (v.category_id && v.category) {
