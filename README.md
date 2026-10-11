@@ -210,10 +210,12 @@ CSV, JSON and TXT adapters are also supported for smaller ad-hoc imports.
   `types.ts` (DTO types, zero runtime imports), `blob.ts` (Vercel Blob),
   `entry-dto.ts` (EntryDTO assembly, tag/photo helpers — node-only)
 - `server/handlers/` — one module per API endpoint (default-exported
-  handler); `api/` holds only 11 thin routers (`[...all].ts` catch-alls per
-  resource plus `entries.ts`, `categories.ts`, `calendar.ts`, `stats.ts`,
-  `tags.ts`) to stay within the Vercel Hobby 12-function limit — public
-  `/api/*` URLs are unchanged
+  handler); `api/` holds only 11 thin flat-file routers (`auth-action`,
+  `entries`, `entry`, `categories`, `category`, `export-router`, `image`,
+  `import`, `calendar`, `stats`, `tags`) to stay within the Vercel Hobby
+  12-function limit — deep public URLs (`/api/entries/:id`, …) are mapped
+  to them via `vercel.json` rewrites with `?id=`/`?action=`/`?format=`
+  params, so the public `/api/*` URLs are unchanged
 - `drizzle/` — migrations (`0000` base, `0001` category seed, `0002` image URL
   columns); snapshots under `drizzle/meta` are kept in sync by hand
   (`npx drizzle-kit check` must stay clean — do not run `db:generate`)
