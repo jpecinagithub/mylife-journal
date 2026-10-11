@@ -204,11 +204,16 @@ CSV, JSON and TXT adapters are also supported for smaller ad-hoc imports.
 
 ## Project layout
 
-- `api/_lib/` — shared backend libs: `schema.ts` (Drizzle tables), `db.ts`
+- `server/lib/` — shared backend libs: `schema.ts` (Drizzle tables), `db.ts`
   (Neon client), `auth.ts` (session/CSRF/rate-limit), `respond.ts` (JSON
   helpers), `validate.ts` (zod schemas, also imported by the browser),
   `types.ts` (DTO types, zero runtime imports), `blob.ts` (Vercel Blob),
   `entry-dto.ts` (EntryDTO assembly, tag/photo helpers — node-only)
+- `server/handlers/` — one module per API endpoint (default-exported
+  handler); `api/` holds only 11 thin routers (`[...all].ts` catch-alls per
+  resource plus `entries.ts`, `categories.ts`, `calendar.ts`, `stats.ts`,
+  `tags.ts`) to stay within the Vercel Hobby 12-function limit — public
+  `/api/*` URLs are unchanged
 - `drizzle/` — migrations (`0000` base, `0001` category seed, `0002` image URL
   columns); snapshots under `drizzle/meta` are kept in sync by hand
   (`npx drizzle-kit check` must stay clean — do not run `db:generate`)
