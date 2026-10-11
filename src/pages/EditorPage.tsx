@@ -116,6 +116,8 @@ export function EditorPage() {
       photos: photos.map((p) => ({
         pathname: p.pathname,
         thumbnailPathname: p.thumbnailPathname,
+        url: p.url ?? null,
+        thumbnailUrl: p.thumbnailUrl ?? null,
         altText: p.altText,
         sortOrder: p.sortOrder,
       })),

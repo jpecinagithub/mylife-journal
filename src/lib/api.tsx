@@ -270,6 +270,10 @@ export function useEntry(id: string | undefined) {
 export interface EntryPhotoInput {
   pathname: string;
   thumbnailPathname?: string | null;
+  /** Resolved public Blob URL (returned by /api/images/upload). Required for
+      display: the stored pathname has no random suffix and is not a URL. */
+  url?: string | null;
+  thumbnailUrl?: string | null;
   altText?: string | null;
   sortOrder?: number;
 }
