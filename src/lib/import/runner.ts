@@ -177,7 +177,7 @@ async function uploadPhotos(
           fileName: photo.fileName,
           contentType: full.contentType,
           data: full.data,
-          thumbnail: thumb.data,
+          thumbnail: { contentType: thumb.contentType, data: thumb.data },
         };
         const res = await apiPost<Record<string, unknown>>('/api/images/upload', uploadBody, signal);
         return {
